@@ -11,6 +11,7 @@
         </Directory>
       </Directories>
       <FileEntry Name="TestApp.exe" Hash="8251BC8CCEBE6A8F606F9F4081A662934A4F2F00ECD6A16B6AEEE1D00FC40DC6" />
+      <FileEntry Name="Animator.dll" Hash="3251BC8CCEBE6A8F606F9F40588AS5934A4F2F00ECD6A16B6AEEE1D00F7S4C50" />
     </Directory>
   </Folders>
   <Registry>
