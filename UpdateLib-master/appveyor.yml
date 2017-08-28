@@ -1,0 +1,24 @@
+version: 0.1.{build}
+skip_tags: true
+configuration: Release
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: k6gJwhivEaPBnNT7CKZEks2q1yreyDbVqkZMt46mN32tgRhHhChvMLgTqrtGoG6R
+  CODECOV_TOKEN:
+    secure: N+vJ8JrMwPFYRWXqX3OB2IE59laOOvt/OotFeFzOjQfApFFHVl1AxsPESs7Lcte2    
+before_build:
+  - nuget restore ".\UpdateLib\UpdateLib.sln"
+build:
+  project: .\UpdateLib\UpdateLib.sln
+  verbosity: minimal
+test_script:
+  - C:\\projects\\updatelib\\UpdateLib\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe -register:user -target:nunit3-console.exe -targetargs:"UpdateLib\UpdateLib.Tests\bin\Release\UpdateLib.Tests.dll" -filter:"+[UpdateLib*]* -[UpdateLib.Tests*]*" -output:opencoverCoverage.xml
+  - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+  - pip install codecov
+  - codecov -f "opencoverCoverage.xml"
